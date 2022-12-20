@@ -9,7 +9,7 @@ import dash_html_components as dhtml
 
 from process import preprocess
 
-data = pd.read_csv('data/data_1000_top_players.csv')
+data = pd.read_csv('data/FIFA22_official_top1000_data.csv')
 data = preprocess(data)
 
 countries = list(data.Nationality.unique())
@@ -120,7 +120,7 @@ app.layout = dhtml.Div([
 def getNationalFlag(select_name):
     photoURL = data[data['Name'] == select_name]['Flag'].values[0]
     image = photoURL.split('/')[-1]
-    return app.get_asset_url('top_1000_flags/' + image)
+    return app.get_asset_url('flags_img/' + image)
 
 
 @app.callback(
@@ -130,7 +130,7 @@ def getNationalFlag(select_name):
 def getPlayerImg(select_name):
     photoURL = data[data['Name'] == select_name]['Photo'].values[0]
     image = photoURL.split('/')[-1]
-    return app.get_asset_url('top_1000_players/' + image)
+    return app.get_asset_url('players_img/' + image)
 
 
 @app.callback(
@@ -290,7 +290,7 @@ def getTwoAttributeFigure(x_label, y_label, player_number):
         ) for i in rows.Nationality.unique()
     ]
     layout = dict(
-        title={"text": str(player_number) + " FIFA 2022 players\' " + str(x_label) + " compares to " + str(y_label),
+        title={"text": str(player_number) + " FIFA 2022 players_img\' " + str(x_label) + " compares to " + str(y_label),
                "font": {"size": 15}},
         xaxis={'type': 'linear', 'title': x_label},
         yaxis={'title': y_label},
